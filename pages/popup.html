@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 任务推送器</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 320px;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .info-section {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .info-section h2 {
+      font-size: 14px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .info-section p,
+    .info-section ul {
+      font-size: 13px;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    .info-section ul {
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    .info-section li {
+      margin-bottom: 6px;
+    }
+
+    .shortcut {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 12px;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      opacity: 0.8;
+      margin-top: 16px;
+    }
+
+    .status {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .status.ready {
+      border: 2px solid rgba(16, 185, 129, 0.5);
+    }
+
+    .emoji {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🚀 AI 任务推送器</h1>
+    <p>异步处理，不打断工作流</p>
+  </div>
+
+  <div class="status ready">
+    <div class="emoji">✓</div>
+    <div>插件已就绪</div>
+  </div>
+
+  <div class="info-section">
+    <h2>📖 使用说明</h2>
+    <ul>
+      <li>在任意网页选中文本</li>
+      <li>按下快捷键打开输入框</li>
+      <li>输入提示词</li>
+      <li>选择发送到 Gemini 或 ChatGPT</li>
+      <li>继续工作，稍后查看结果</li>
+    </ul>
+  </div>
+
+  <div class="info-section">
+    <h2>⌨️ 快捷键</h2>
+    <p>打开输入框：</p>
+    <div class="shortcut">
+      所有平台: Ctrl + Shift + G
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>💡 提示</h2>
+    <p>每次推送都会在 AI 页面中自动创建新的对话，不会与之前的对话混在一起。AI 在后台标签页运行，不会打断你当前的工作。</p>
+  </div>
+
+  <div class="footer">
+    版本 1.0.0 | 高效工作，异步处理
+  </div>
+</body>
+</html>
+

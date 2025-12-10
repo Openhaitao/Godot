@@ -1,0 +1,27 @@
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 编辑器文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 临时文件
+*.log
+*.tmp
+
+# 打包文件
+*.zip
+*.crx
+*.pem
+
+# 图标文件（如果用户生成了自己的）
+# icon*.png
+
+# Node modules（如果将来添加构建工具）
+node_modules/
+package-lock.json
+
