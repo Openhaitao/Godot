@@ -118,6 +118,12 @@ function sendToAI(target, selectedText) {
     return;
   }
 
+  // 检查扩展上下文是否有效
+  if (!chrome.runtime?.id) {
+    alert('扩展已更新或重新加载，请刷新此页面后重试！\n\n按 F5 或 Ctrl+R (Mac: Cmd+R) 刷新页面。');
+    return;
+  }
+
   // 构建完整的消息
   let fullMessage = userPrompt;
   if (selectedText) {
@@ -134,26 +140,42 @@ function sendToAI(target, selectedText) {
   btn.disabled = true;
 
   // 发送消息到 background script
-  chrome.runtime.sendMessage({
-    action: 'sendToAI',
-    target: target,
-    message: fullMessage
-  }, (response) => {
-    if (response && response.success) {
-      // 显示成功提示
-      btn.innerHTML = '<span class="ai-btn-icon">✓</span> 已发送！';
-      btn.style.backgroundColor = '#10b981';
-      
-      // 2秒后关闭
-      setTimeout(() => {
-        closePromptBox();
-      }, 1500);
-    } else {
-      // 失败提示
-      alert('发送失败：' + (response?.error || '未知错误'));
-      btn.innerHTML = originalText;
-      btn.disabled = false;
-    }
-  });
+  try {
+    chrome.runtime.sendMessage({
+      action: 'sendToAI',
+      target: target,
+      message: fullMessage
+    }, (response) => {
+      // 检查是否有运行时错误
+      if (chrome.runtime.lastError) {
+        console.error('Runtime error:', chrome.runtime.lastError);
+        alert('扩展连接失败，请刷新此页面后重试！\n\n错误：' + chrome.runtime.lastError.message);
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        return;
+      }
+
+      if (response && response.success) {
+        // 显示成功提示
+        btn.innerHTML = '<span class="ai-btn-icon">✓</span> 已发送！';
+        btn.style.backgroundColor = '#10b981';
+        
+        // 2秒后关闭
+        setTimeout(() => {
+          closePromptBox();
+        }, 1500);
+      } else {
+        // 失败提示
+        alert('发送失败：' + (response?.error || '未知错误'));
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    });
+  } catch (error) {
+    console.error('Send error:', error);
+    alert('扩展已更新或重新加载，请刷新此页面后重试！\n\n按 F5 或 Ctrl+R (Mac: Cmd+R) 刷新页面。');
+    btn.innerHTML = originalText;
+    btn.disabled = false;
+  }
 }
 
